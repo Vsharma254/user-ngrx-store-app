@@ -1,0 +1,100 @@
+export const sendOTPReponse = {
+    tokenValue: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1Mjg0ODczNDgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDk0MjMvIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0OTQyMy8ifQ.rFSXOvNp-OoO-hJz5HMyJgYa1p_eYuXlBbdb7g3K1aI"
+}
+export const oTPVerifyResponse = {
+    candidateGuid: '4b4d1b7a-05d9-4c4d-b7ed-117928bb2dbc'
+}
+
+export const getCandidateDetails =
+{
+    "personalDetails":{
+       "id":6,
+       "tokenNo":"test",
+       "dated":"2002-02-02T00:00:00",
+       "regNo":"123",
+       "rollNo":"1234567",
+       "candidateName":"test",
+       "fatherName":"test",
+       "motherName":"test",
+       "dob":"1992-02-02T00:00:00",
+       "mobileNo":"7579090631",
+       "alternateMobileNo":"7579090631",
+       "email":"naggarwal@gmail.com",
+       "gender":"M",
+       "nationalityId":1,
+       "residentialDomicileId":3,
+       "categoryId":17,
+       "subCategoryId":10,
+       "stateId":10,
+       "currentAddress":"test",
+       "permanentAddress":"test",
+       "pincode":"248001",
+       "photoImageUrl":"photo",
+       "signatureImageUrl":"signature",
+       "addedBy":0,
+       "addedOn":"0001-01-01T00:00:00",
+       "modifiedBy":0,
+       "modifiedOn":"0001-01-01T00:00:00",
+       "isVisible":false
+    },
+    "courseDetails":{
+       "id":1,
+       "personalDetailsId":6,
+       "qualifyingExamId":3,
+       "qualifyingBranchId":1,
+       "academicDomicileId":3,
+       "qualifyingPassingYear":2014,
+       "collegeName":"test",
+       "courseAppliedId":3,
+       "admissionThroughId":1,
+       "tfw":false,
+       "ukseeTotalMarks":100,
+       "ukseeObtainedMarks":80,
+       "ukseeOverALlRank":120,
+       "ukseeCategoryRank":1,
+       "qualifiedExamMarks":120,
+       "qualifiedExamYear":2015,
+       "gateScore":17,
+       "air":1,
+       "addedBy":0,
+       "addedOn":"0001-01-01T00:00:00",
+       "modifiedBy":0,
+       "modifiedOn":"0001-01-01T00:00:00",
+       "isVisible":false
+    },
+    "educationDetails":[
+       {
+          "id":1,
+          "educationCourseId":1,
+          "board":"1",
+          "statusId":1,
+          "totalMarks":100,
+          "obtainMarks":87,
+          "percentage":76,
+          "year":2007,
+          "personalDetailsId":6,
+          "addedBy":0,
+          "addedOn":"0001-01-01T00:00:00",
+          "modifiedBy":0,
+          "modifiedOn":"0001-01-01T00:00:00",
+          "isVisible":false
+       },
+       {
+          "id":2,
+          "educationCourseId":2,
+          "board":"1",
+          "statusId":2,
+          "totalMarks":100,
+          "obtainMarks":98,
+          "percentage":65,
+          "year":2001,
+          "personalDetailsId":6,
+          "addedBy":0,
+          "addedOn":"0001-01-01T00:00:00",
+          "modifiedBy":0,
+          "modifiedOn":"0001-01-01T00:00:00",
+          "isVisible":false
+       }
+    ]
+ }
+    

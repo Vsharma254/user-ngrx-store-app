@@ -1,0 +1,77 @@
+<form [formGroup]="formGroup" class="card">
+  <div class="card-header">
+    <h3 class="card-title">Education Details</h3>
+  </div>
+  <div class="disable-whole-div__cover" [hidden]="!isDisable"></div>
+  <div class="card-body">
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table table-hover" formArrayName="list">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Course </th>
+              <th> Appeared/ passes</th>
+              <th>Board/ University</th>
+              <th>Passing Year</th>
+              <th>Total Marks</th>
+              <th>Obtain Marks</th>
+              <th>Per(%)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let e of formGroup.controls.list.controls; let i = index" [formGroupName]="i">
+              <td>{{i+1}}</td>
+              <td>
+                  <input class="form-control" formControlName="educationCourseName">
+              <td>
+                <select class="form-control" formControlName="statusId">
+                  <option value="1">Appeared</option>
+                  <option value="2">Paased</option>
+                </select>
+              </td>
+              <td>
+                <input class="form-control" formControlName="board"
+                 [ngClass]="{'border-red1px': (!e.controls.board.valid && e.value.isSubmitAttepted) }">
+              </td>
+              <td>
+                <input class="form-control" formControlName="year"
+                [ngClass]="{'border-red1px': (!e.controls.year.valid && e.value.isSubmitAttepted) }">
+              </td>
+              <td>
+                <input class="form-control" formControlName="totalMarks"
+                [ngClass]="{'border-red1px': (!e.controls.totalMarks.valid && e.value.isSubmitAttepted) }">
+              </td>
+              <td>
+                <input class="form-control" formControlName="obtainMarks"
+                [ngClass]="{'border-red1px': (!e.controls.obtainMarks.valid && e.value.isSubmitAttepted) }">
+              </td>
+              <td>
+                <input class="form-control" formControlName="percentage"
+                [ngClass]="{'border-red1px': (!e.controls.percentage.valid && e.value.isSubmitAttepted) }">
+              </td>
+              <td>
+                <button type="button" [disabled]="isEditable" (click)="updateEducation(e,i);" class="btn btn-primary">Update</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /.table-responsive -->
+    </div>
+    <!-- /.panel-body -->
+  </div>
+  <div class="card-footer text-right">
+      <div class="d-flex">
+        <button class='btn btn-bitbucket' (click)="setNextPrTab('cdetails')">
+          <i class="fa fa-arrow-left" data-toggle="tooltip" title="" data-original-title="fa fa-arrow-left"></i>
+          &nbsp;Previous
+        </button>
+        <div class="btn-list ml-auto">
+            <input type='button' *ngIf="!isEditable" class='btn btn-success ml-auto' (click)="finalSaveDetails()" 
+            name='finish' value='Finish' />
+        </div>
+      </div>
+    </div>  
+</form>

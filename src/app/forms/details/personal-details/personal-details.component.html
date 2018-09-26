@@ -1,0 +1,204 @@
+<form [formGroup]="personDeFormG" class="card">
+    <div class="card-header">
+        <h3 class="card-title">Candidate Personal Details</h3>
+    </div>
+    <div class="disable-whole-div__cover" [hidden]="!isDisable"></div>
+    <div class="card-body">        
+        <div class="row">
+            <div class="col-sm-8 col-md-8">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">CR No.</div>
+                            <p class="form-control-static">{{candidate.tokenNo}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">Dated</div>
+                            <p class="form-control-static">{{candidate.dated | date: 'dd/MM/yyyy'}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">UKSEE Registration No</div>
+                            <p class="form-control-static">{{candidate.regNo}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">UKSEE Roll No</div>
+                            <p class="form-control-static">{{candidate.rollNo}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">Candidate Name <span class="smal-lbl">(As per the high school certificate)</span></div>
+                            
+                            <p class="form-control-static">{{candidate.candidateName}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">Father Name <span class="smal-lbl">(As per the high school certificate)</span></div>
+                            <p class="form-control-static">{{candidate.fatherName}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">Mother Name <span class="smal-lbl">(As per the high school certificate)</span></div>
+                            <p class="form-control-static">{{candidate.motherName}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">Date of Birth <span class="smal-lbl">(As per the high school certificate)</span></div>
+                            <p class="form-control-static">{{candidate.dob | date: 'dd/MM/yyyy'}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">Gender</div>
+                            <div class="custom-controls-stacked">
+                                <label class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" value="M" formControlName="gender" class="custom-control-input" name="gender">
+                                    <span class="custom-control-label posi-static">Male</span>
+                                </label>
+                                <label class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" value="F" formControlName="gender" class="custom-control-input" name="gender">
+                                    <span class="custom-control-label posi-static">Female</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">State of Domicile</div>
+                            <select
+                            [ngClass]="{'border-red1px': (!personDeFormG.get('residentialDomicileId').valid && isSubmitAttept) }"
+                             class="form-control" (change)="onResidentialChange()" formControlName="residentialDomicileId">
+                                    <option> -- Select State --</option>
+                                <option *ngFor="let item of resiDomecileList" value="{{item.id}}">{{item.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">Category </div>
+                            <select class="form-control"
+                            [ngClass]="{'border-red1px': (!personDeFormG.get('categoryId').valid && isSubmitAttept) }"
+                             (change)="onCategoryChange()" formControlName="categoryId">
+                                <option> -- Select Category --</option>
+                                <option *ngFor="let item of categoryList" value="{{item.id}}">{{item.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">Sub Category</div>
+                            <select 
+                            [ngClass]="{'border-red1px': (!personDeFormG.get('subCategoryId').valid && isSubmitAttept) }"
+                             class="form-control" formControlName="subCategoryId">
+                                    <option> -- Select Sub Category --</option>
+                                <option *ngFor="let item of subCategoryList" value="{{item.id}}">{{item.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">Mobile Number</div>
+                            <input type="number" class="form-control" 
+                            [ngClass]="{'is-invalid': (!personDeFormG.get('mobileNo').valid && isSubmitAttept) }" formControlName="mobileNo">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">Alternate Mobile Number</div>
+                            <input type="number" class="form-control" formControlName="alternateMobileNo">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">Email-ID</div>
+                            <input class="form-control" formControlName="email" [ngClass]="{'is-invalid': (!personDeFormG.get('email').valid && isSubmitAttept) }">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">PIN Code</div>
+                            <input type="number" [ngClass]="{'is-invalid': (!personDeFormG.get('pincode').valid && isSubmitAttept) }"
+                             class="form-control" formControlName="pincode">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">Current Address</div>
+                            <input class="form-control" formControlName="currentAddress">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <div class="form-label">State</div>
+                            <select [ngClass]="{'border-red1px': (!personDeFormG.get('stateId').valid && isSubmitAttept) }"
+                             class="form-control" formControlName="stateId">
+                             <option> -- Select State --</option>
+                                <option *ngFor="let s of stateList" value="{{s.id}}">{{s.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4">
+                <div class="form-group col-lg-12">
+                    <div class="lb-photo">Candidate Photo</div>
+                    <div class="card edit-img">
+                        <a  class="img-con">
+                            <img class="card-img-top imag" *ngIf="imageUrl"  [src]="imageUrl">
+                        </a>
+                        <div class="row pad-lfrig">
+                            <div class="col-md-6">
+                                <div class="" *ngIf="showPhotoUpload">
+                                    <input type="file" #photofile (change)="onPhotoFileChange($event)">
+                                </div>
+                            </div>
+                            <div class="col-md-6" *ngIf="!isEditable">
+                                <a (click)="changePhotoShow()" class="btn btn-outline-primary btn-sm pull-right">
+                                    Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-lg-12">
+                    <div class="lb-photo">Candidate Signature</div>
+                    <div class="card edit-img">
+                        <a  class="img-con">
+                            <img class="card-img-top imag-sign" *ngIf="signatureURL" [src]="signatureURL">
+                        </a>
+                        <div class="row pad-lfrig">
+                            <div class="col-md-6">
+                                <div class="" *ngIf="showSignatureUpload">
+                                    <input type="file" #signaturefile (change)="onSignatureFileChange($event)">
+                                </div>
+                            </div>
+                            <div class="col-md-6" *ngIf="!isEditable">
+                                <a (click)="changeSignatureShow()" class="btn btn-outline-primary btn-sm pull-right">
+                                    Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-right">
+        <div class="btn-list ml-auto">
+            <input type='button' *ngIf="!isEditable" class='btn btn-warning ml-auto'  (click)="updatePDetails()" value='Update Personal Details'
+            />
+            <button  class='btn btn-bitbucket ml-auto' (click)="setNextPrTab('cdetails')">
+                Next&nbsp;
+                <i class="fa fa-arrow-right" data-toggle="tooltip" title="" data-original-title="fa fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</form>

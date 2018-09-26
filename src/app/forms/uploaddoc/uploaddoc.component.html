@@ -1,0 +1,75 @@
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Upload Your Document Here</h3>
+  </div>  
+  <form [formGroup]="docFormG" class="card-body">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="form-label">Select Document Type</label>
+          <select class="form-control" formControlName="docTypeId"
+           [ngClass]="{'is-invalid': (!docFormG.get('docTypeId').valid && isSubmitAttept) }" 
+           >
+            <option value="0" selected>--Select Doc Type--</option>
+            <option *ngFor="let item of documentsTypeList" value="{{item.id}}">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-8 col-md-3">
+        <div class="form-group">
+          <label class="form-label">Select Document</label>
+          <input type="file" (change)="onFileChange($event)" formControlName="doc" #fileinput
+          [ngClass]="{'border-red1px': (!docFormG.get('doc').valid && isSubmitAttept) }" >
+        </div>
+      </div>
+      <div class="col-sm-8 col-md-8">
+        <div class="form-group">
+          <div class="btn-list">
+            <input type='button' class='btn btn-primary' [disabled]="isEditable" (click)="uploadDoc();" name='finish' value='Upload' />
+            <input type='button' class='btn btn-danger' [disabled]="isEditable" (click)="CancleUpload();" name='finish' value='Cancel' />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Uploaded Documents</h3>
+        </div>
+        <div class="table-responsive make-scrollable">
+          <table class="table card-table table-vcenter text-nowrap">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Document Type</th>
+                <th>Name</th>
+                <th>Document</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let e of documents; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{e.documentTypeName}}</td>
+                <td>{{e.documentUploadName}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="creatUrl(e.documentUploadURL)"><i class="fa fa-address-book"></i> View Document</button>                                    
+                </td>
+                <td>
+                    <button type="button" [disabled]="isEditable || pbar" class="btn btn-danger" (click)="deleteDocument(e)"><i class="fe fe-trash"></i> Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-right">
+    <div class="d-flex">
+        <input type='button' [disabled]="pbar" *ngIf="!isEditable" class='btn btn-primary ml-auto' (click)="finalSaveDoc()" name='finish' value='Finish' />
+    </div>
+</div>
+<!-- /.panel-body -->

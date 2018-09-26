@@ -1,0 +1,78 @@
+<div class="page">
+  <div class="page-main">
+    <div class="header py-4" style="padding-top: 5px!important; padding-bottom: 5px!important">
+      <div class="container">
+        <div class="d-flex">
+          <a class="header-brand" href="#" style="padding-top: 3px;">
+            <img src="/assets/img/logo.png" class="header-brand-img" alt="Test Logo" style="height: 54px;width: 59px;">
+          </a>
+          <div class="d-flex order-lg-2" style="flex-basis: 100%;">
+            <div class="nav-item d-none d-md-flex hdr" >
+              <!-- <img src="/assets/img/banner.png" style="height: 60px; width: 100%;" class="border-ims" />
+                 -->
+              <div style="display: block; width: 100%;
+              ">
+                <h3 style="margin-bottom: 0!important"> NGRX Best Implementation </h3>
+
+              </div>
+              <div style="display: block; width: 100%;
+              ">
+                  <h4> Application To Add User And Get User With Mock Backend </h4>
+  
+                </div>
+                <!-- <div style="display: block; width: 100%;
+                ">
+                    <h4 style="
+                    display: block;
+                    width: 100%;
+                ">A State Government University</h4>
+    
+                  </div> -->
+              <!-- <a href="https://github.com/tabler/tabler" class="btn btn-sm btn-outline-primary" target="_blank">Source code</a> -->
+            </div>
+            <div class="dropdown" [ngClass]="{'show':flipUserD}" style="min-width: 147px;">
+              <a *ngIf="showUser" (click)="flipUser()" class="nav-link pr-0 leading-none" style="padding-top: 24px!important;">
+                <span class="avatar" style="background-image: url(./demo/faces/female/25.jpg)"></span>
+                <span class="ml-2 d-none d-lg-block">
+                  <span class="text-default">{{candidate?.candidateName}}</span>
+                  <small class="text-muted d-block mt-1">UKSEE Candidate</small>
+                </span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" [ngClass]="{'show':flipUserD}">
+                <a class="dropdown-item" (click)="logoutUser()">
+                  <i class="dropdown-icon fe fe-log-out"></i> Sign out
+                </a>
+              </div>
+            </div>
+          </div>
+          <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
+            <span class="header-toggler-icon"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+    <simple-notifications></simple-notifications>
+    <jaspero-confirmations></jaspero-confirmations>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row align-items-center flex-row-reverse">
+        <div class="col-auto ml-lg-auto">
+          <div class="row align-items-center">
+            <div class="col-auto">
+
+            </div>
+            <div class="col-auto">
+
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
+          Copyright © 2018
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

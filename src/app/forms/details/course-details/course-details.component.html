@@ -1,0 +1,152 @@
+<form [formGroup]="courseFormG" class="card">
+  <div class="card-header">
+    <h3 class="card-title">Course & Exam Details</h3>
+  </div>
+  <div class="disable-whole-div__cover" [hidden]="!isDisable"></div>
+  <div class="card-body">
+    <div class="row">
+      
+        <div class="col-sm-4 col-md-4">
+          <div class="form-group">
+            <div class="form-label">Qualifying Exam for UKSEE</div>
+            <select class="form-control" (change)="onQualifyingExChange()" formControlName="qualifyingExamId">
+              <option> -- Select Qualifying Exam --</option>
+              <option *ngFor="let item of qualifyingExamList" value="{{item.id}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-4">
+          <div class="form-group">
+            <div class="form-label">Branch in Qualified Exam (if Any)</div>
+            <select class="form-control" formControlName="qualifyingBranchId">
+              <option> -- Select Branch --</option>
+              <option *ngFor="let item of branchList" value="{{item.id}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-4">
+          <div class="form-group">
+            <div class="form-label">Passing Year</div>
+            <input class="form-control" formControlName="qualifyingPassingYear">
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-4">
+          <div class="form-group">
+            <div class="form-label">College Name</div>
+            <input class="form-control" formControlName="collegeName">
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-4">
+          <div class="form-group">
+            <div class="form-label">Admission Through</div>
+            <select class="form-control" formControlName="admissionThroughId" (change)="onadmissionThroughChange()">
+              <option> -- Select Admission Through --</option>
+              <option *ngFor="let item of admiTrhghList" value="{{item.id}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-4">
+          <div class="form-group">
+            <div class="form-label">Course Applied IN UKSEE APPLICATION</div>
+            <select class="form-control" formControlName="courseAppliedId">
+              <option> -- Select Course --</option>
+              <option *ngFor="let item of courseAppliedList" value="{{item.id}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-4">
+          <div class="form-group">
+            <div class="form-label">Academic DOMICILE <span class="smal-lbl">(Name of  State from candidate Qualfying Exam  passed)</span></div>
+            <select class="form-control" formControlName="academicDomicileId">
+              <option> -- Select Academic DOMICILE --</option>
+              <option *ngFor="let item of acadmicDomecileList" value="{{item.id}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-8 col-md-8">
+          <div class="form-group">
+            <div class="form-label">Do you want to apply Under TFW quota : (Yes/NO) </div>
+            <div class="custom-controls-stacked">
+              <label class="custom-control custom-radio custom-control-inline">
+                <input type="radio" value="Y" name="tfw" formControlName="tfw" class="custom-control-input">
+                <span class="custom-control-label posi-static">Yes</span>
+              </label>
+              <label class="custom-control custom-radio custom-control-inline">
+                <input type="radio" value="N" name="tfw" formControlName="tfw" class="custom-control-input">
+                <span class="custom-control-label posi-static">No</span>
+              </label>
+              <span class="smal-lbl">( <b>Candidates having state of domicile as “Uttarakhand” </b> can apply for seats under <b>“Tuition Fee Waiver (FW)” </b> scheme, which is only for those candidates whose
+                Parent Annual Income from all sources is below Rs:4.5 Lac for current financial year. year)</span>
+            </div>
+            
+          </div>
+        </div>      
+      <!-- /.row (nested) -->
+    </div>
+    <div class="row">
+      <div class="panel-body" style="width:100%;">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td rowspan="2">UKSEE Result Details</td>
+                <td>Total Marks</td>
+                <td>Obtained Marks</td>
+                <td>Overall Rank</td>
+                <td>Category Rank </td>
+              </tr>
+              <tr>
+                <td>{{course?.ukseeTotalMarks}}</td>
+                <td>{{course?.ukseeObtainedMarks}}</td>
+                <td>{{course?.ukseeOverALlRank}}</td>
+                <td>{{course?.ukseeCategoryRank}}</td>
+              </tr>
+              <tr>
+                <td rowspan="2">
+                  GATE /CAT/MAT Score
+                </td>
+                <td>Marks (out of 100)</td>
+                <td>Year</td>
+                <td>GATE SCORE</td>
+                <td>AIR</td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="number" class="form-control" formControlName="qualifiedExamMarks" [ngClass]="{'is-invalid': (!courseFormG.get('qualifiedExamMarks').valid && isSubmitAttept) }">
+                </td>
+                <td>
+                  <input type="number" class="form-control" formControlName="qualifiedExamYear" [ngClass]="{'is-invalid': (!courseFormG.get('qualifiedExamYear').valid && isSubmitAttept) }">
+                </td>
+                <td>
+                  <input type="number" class="form-control" formControlName="gateScore" [ngClass]="{'is-invalid': (!courseFormG.get('gateScore').valid && isSubmitAttept) }">
+                </td>
+                <td>
+                  <input type="number" class="form-control" formControlName="air" [ngClass]="{'is-invalid': (!courseFormG.get('air').valid && isSubmitAttept) }">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+    </div>
+    <!-- /.panel-body -->
+  </div>
+  <!-- /.panel -->
+  <div class="card-footer text-right">
+    <div class="d-flex">
+      <button class='btn btn-bitbucket' (click)="setNextPrTab('pdetails')">
+        <i class="fa fa-arrow-left" data-toggle="tooltip" title="" data-original-title="fa fa-arrow-left"></i>
+        &nbsp;Previous
+      </button>
+      <div class="btn-list ml-auto">
+        <input type='button' *ngIf="!isEditable" class='btn btn-warning ml-auto' (click)="updateCourse()" value='Update Course Details'
+        />
+        <button class='btn btn-bitbucket ml-auto' (click)="setNextPrTab('edetails')">
+          Next &nbsp;
+          <i class="fa fa-arrow-right" data-toggle="tooltip" title="" data-original-title="fa fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

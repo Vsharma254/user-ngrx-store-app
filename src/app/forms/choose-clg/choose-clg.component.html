@@ -1,0 +1,128 @@
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Select Colleges</h3>
+      </div>
+      <div class="card-body" *ngIf="!(seatOtp.isSent)">
+        <form [formGroup]="courseFormG" class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">Selected Course</label>
+              <p class="form-control-static">{{course.courseApplied}}</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">College Type</label>
+              <select class="form-control" [ngClass]="{'border-red1px': (!courseFormG.get('collegeTypeId').valid && isSubmitAttept) }"
+                formControlName="collegeTypeId" (change)="collegeTypeChange()">
+                <option value=0>-- Select College Type --</option>
+                <option *ngFor="let item of collegeType" value={{item.id}}>{{item.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">Colleges</label>
+              <select class="form-control" [ngClass]="{'border-red1px': (!courseFormG.get('collegeId').valid && isSubmitAttept) }" (change)="collegeChange()"
+                formControlName="collegeId">
+                <option value=0>-- Select College --</option>
+                <option *ngFor="let item of colleges" value={{item.id}}>{{item.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label">Branch</label>
+              <select class="form-control" [ngClass]="{'border-red1px': (!courseFormG.get('branchId').valid && isSubmitAttept) }" formControlName="branchId">
+                <option value=0>-- Select Branch --</option>
+                <option *ngFor="let item of brnaches" value={{item.id}}>{{item.name}}</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer text-right" *ngIf="!(seatOtp.isSent)">
+        <input type='button' title="Add to list" (click)="addMoreRow()" [disabled]="isEditable" class='btn btn-primary' name='next'
+          value='+Add To List'>
+      </div>
+      <div class="card-body">          
+        <form [formGroup]="OtpFormG" class="row" *ngIf="seatOtp.isSent">
+          <div class="col-md-12">
+            <div class="alert alert-primary" role="alert">
+              OTP has been sent to your registered mobile number ({{seatOtp.mobileNo}}).
+            </div>
+            <div class="form-group">
+              <label class="form-label">Enter OTP</label>
+              <input type="number" formControlName="otpValue" class="form-control" [ngClass]="{'border-red1px': (!OtpFormG.get('otpValue').valid && isOtpSubmitAttept) }"
+                (change)="collegeChange()">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="card-footer text-right" style="padding-left: 0px!important">
+              <div class="btn-list ml-auto">
+                <div class="form-group">
+                  <input type='button' style="float:left" (click)="resendOPT()" title="Resend OTP" class='btn btn-primary  ml-auto' value='Resend OTP'>
+                  <input type='button' style="margin-right: 10px;" (click)="verifyOPT()" title="Verify OTP" class='btn btn-success  ml-auto' value='Verify OTP'>
+                  <input type='button' (click)="CancelOTP()" title="Cancel" class='btn btn-danger  ml-auto' value='Cancel'>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Selected Colleges List</h3>
+      </div>
+      <app-progress-bar [showProgress]="priPStatus"></app-progress-bar>
+      <div class="table-responsive make-scrollable" style="min-height: 129px">
+        
+        <table class="table card-table table-vcenter text-nowrap">
+          <thead>
+            <tr>
+              <th>Priority Order</th>
+              <th>College</th>
+              <th> Branch</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let e of selectedCollegeList; let i = index; let last = last; let first = first">
+              <td>{{e.priorityOrder}}
+                <button type="button" *ngIf="!first" [disabled]="isEditable || priPStatus || seatOtp.isSent" (click)="setPriority(e, 1)">
+                  <i class="fa fa-arrow-up" data-toggle="tooltip" title="Move Up" data-original-title="fa fa-arrow-up"></i>
+                </button>
+                <button type="button" *ngIf="!last" [disabled]="isEditable || priPStatus || seatOtp.isSent" (click)="setPriority(e, -1)">
+                  <i class="fa fa-arrow-down" data-toggle="tooltip" title="Move Down" data-original-title="fa fa-arrow-down"></i>
+                </button>
+              </td>
+              <td>
+                {{e.collegeName}}
+              </td>
+              <td>
+                {{e.branchName}}
+              </td>
+              <td>
+                <button type="button" [disabled]="isEditable || priPStatus || seatOtp.isSent" title="Remove from list" class="btn btn-danger" (click)="removeCollege(e)">Remove</button>
+              </td>
+            </tr>
+            <tr *ngIf="selectedCollegeList.length==0">
+              <td colspan="4">No college added.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer text-right">
+        <div class="btn-list ml-auto">
+          <button type="button" [disabled]="isEditable || priPStatus || seatOtp.isSent" title="Save all college" (click)="saveAllCollege()" class="btn btn-primary">Save Colleges</button>
+          <button type="button" [disabled]="isEditable || priPStatus || seatOtp.isSent" title="Finish" (click)="finalSave()" class="btn btn-success">Finish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row">
+    <div class="col col-login mx-auto">
+      <app-progress-bar></app-progress-bar>
+      <form class="card" [formGroup]="loginFormG" *ngIf="!showOtpSection && !isShowForgot">
+        <div class="disable-whole-div__cover" [hidden]="!isDisable"></div>
+        <div class="card-body p-6">
+          <div class="card-title">Login to your account</div>
+          <div class="form-group">
+            <label class="form-label"> Registration No</label>
+            <input type="text" [ngClass]="{'is-invalid': (!loginFormG.get('registrationId').valid && isAttemtLogin) }" class="form-control"
+              formControlName="registrationId" placeholder="Enter Registration No" required="">
+          </div>
+          <div class="form-group">
+            <label class="form-label">
+              Date of Birth
+              <a (click)="ShowForgot()" class="float-right small forgotlink">I forgot DOB</a>
+            </label>
+            <div class="input-group">
+              <input class="form-control" [ngClass]="{'is-invalid': (!loginFormG.get('dob').valid && isAttemtLogin) }" placeholder="dd/mm/yyyy"
+                name="dp" formControlName="dob" ngbDatepicker #d="ngbDatepicker">
+              <span class="input-group-append">
+                <button class="btn btn-primary" type="button" (click)="d.toggle()">Date!</button>
+              </span>
+            </div>
+          </div>
+          <div class="form-footer">
+            <button type="submit" class="btn btn-primary btn-block" (click)="sendOTP()">Send OTP</button>
+          </div>
+        </div>
+      </form>
+      <form class="card" [formGroup]="otpFormG" *ngIf="showOtpSection && !isShowForgot">
+        <div class="disable-whole-div__cover" [hidden]="!isDisable"></div>
+        <div class="card-body p-6">
+          <div class="card-title">Enter OTP to access you account </div>
+          <div class="form-group">
+            <label class="form-label">OTP</label>
+            <input type="text" class="form-control" [ngClass]="{'is-invalid': (!otpFormG.get('oTPValue').valid && isAttemtotp) }" formControlName="oTPValue"
+              placeholder="Enter OTP" required="">
+          </div>
+          <div class="form-footer">
+            <div class="btn-list ml-auto">
+              <button type="button" title="Verify OTP" (click)="verifyOTP()" class="btn btn-success">Verify OTP</button>
+              <button type="button" title="Resend OTP" (click)="resendOTP()" class="btn btn-primary">Resend OTP</button>
+              <button type="button" title="Cancel" (click)="cancelOTP()" class="btn btn-danger">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <form class="card" [formGroup]="forgotFormG" *ngIf="isShowForgot">
+        <!-- <div class="disable-whole-div__cover" [hidden]="!isDisable"></div> -->
+        <div class="card-body p-6">
+          <div class="card-title">Enter Registration ID to get your DOB </div>
+          <div class="form-group">
+            <label class="form-label">Registration ID</label>
+            <input type="text" class="form-control" [ngClass]="{'is-invalid': (!forgotFormG.get('regNo').valid && isAttempForgot) }"
+              formControlName="regNo" placeholder="Enter OTP" required="">
+          </div>
+          <div class="form-footer ml-auto">
+            <div class="btn-list float-right">
+              <button type="button" class="btn btn-primary ml-auto" (click)="forgotDOB()">Sent DOB</button>
+              <button type="button" class="btn btn-danger ml-auto" (click)="ShowForgot()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="alert alert-icon alert-primary" role="alert" style="text-align: center;" *ngIf="showOtpSection">
+    <i class="fe fe-bell mr-2" aria-hidden="true" style="margin-left: 29%;"></i> OTP has been sent to your registered mobile number ({{mobileNo}}).
+  </div>
+  <div class="alert alert-icon alert-primary" role="alert" style="text-align: center;" *ngIf="forgotDOBResp.mobileNo">
+    <i class="fe fe-bell mr-2" aria-hidden="true" style="margin-left: 27%;"></i> Date of birth has been sent to your registered mobile number ({{forgotDOBResp.mobileNo}}).
+  </div>
+</div>

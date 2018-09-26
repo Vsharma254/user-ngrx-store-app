@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+$theme-colors: (
+  "primary": #007bff,
+  "danger": #ff4136
+);
+$theme-colors: (
+  "custom-color": #900
+);
+.text-center {
+  text-align: center !important;
+}
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+.jaspero__dialog {
+  .jaspero__dialog-actions {
+    .default {
+      font-weight: 600 !important;
+      letter-spacing: 0.03em !important;
+      font-size: 0.8125rem !important;
+      min-width: 2.375rem;
+      color: #fff !important;
+      background-color: #cd201f !important;
+      border-color: #cd201f !important;
+    }
+    .primary {
+      font-weight: 600 !important;
+      letter-spacing: 0.03em !important;
+      font-size: 0.8125rem !important;
+      min-width: 2.375rem;
+      color: #fff !important;
+      background-color: #5eba00 !important;
+      border-color: #5eba00 !important;
+    }
+  }
+}

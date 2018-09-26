@@ -1,0 +1,65 @@
+<div class="wizard-container">
+  <div class="card wizard-card" data-color="green" id="wizard">
+    <form action="" method="">
+      <div class="wizard-navigation">
+        <div class="progress-with-circle">
+          <div class="progress-bar" #progressStatus role="progressbar" aria-valuenow="1" 
+          aria-valuemin="1" aria-valuemax="4" [style.width.%]="width"></div>
+        </div>
+        <ul class="mylist">
+          <li>
+            <a routerLink="/uksee/details/all" routerLinkActive="active" [ngClass]="{'action-done':isEditDone.done}">
+              <div class="icon-circle" [ngClass]="{'action-done-bord':isEditDone.done}">
+                <i *ngIf="!(isEditDone.inproccess)" class="fe fe-more-horizontal" [ngClass]="{'action-done':isEditDone.done}"></i>
+                <i *ngIf="isEditDone.inproccess" class="fe fe-check done-st" [ngClass]="{'action-done':isEditDone.done}"></i>
+              </div>
+              Details</a>
+          </li>
+          <li>
+            <a [routerLink]="progressS > 0 ? '/uksee/details/payment' : null" routerLinkActive="active" [ngClass]="{'action-done':isPaymentDone.done}">
+              <div class="icon-circle" [ngClass]="{'action-done-bord':isPaymentDone.done}">
+                <i *ngIf="!(isPaymentDone.inproccess)" class="fe fe-more-horizontal" [ngClass]="{'action-done':isPaymentDone.done}"></i>
+                <i *ngIf="isPaymentDone.inproccess" class="fe fe-check done-st" [ngClass]="{'action-done':isPaymentDone.done}"></i>
+              </div>
+              Payment</a>
+          </li>
+          <li>
+            <a [routerLink]="progressS > 1 ? '/uksee/details/uploaddoc':null" routerLinkActive="active"  [ngClass]="{'action-done':isDocDone.done}">
+              <div class="icon-circle" [ngClass]="{'action-done-bord':isDocDone.done}">
+                <i *ngIf="!(isDocDone.inproccess)" class="fe fe-more-horizontal" [ngClass]="{'action-done':isDocDone.done}"></i>
+                <i *ngIf="isDocDone.inproccess" class="fe fe-check done-st" [ngClass]="{'action-done':isDocDone.done}"></i>
+              </div>
+              Upload Document</a>
+          </li>
+
+          <li>
+            <a [routerLink]="progressS > 2 ? '/uksee/details/choosecollege':null" [ngClass]="{'action-done':isSelectclgDone.done}">
+              <div class="icon-circle" [ngClass]="{'action-done-bord':isSelectclgDone.done}">
+                <i *ngIf="!(isSelectclgDone.inproccess)"  class="fe fe-more-horizontal" [ngClass]="{'action-done':isSelectclgDone.done}"></i>
+                <i *ngIf="isSelectclgDone.inproccess" class="fe fe-check done-st" [ngClass]="{'action-done':isSelectclgDone.done}"></i>
+              </div>
+              Select Colleges
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="progressS > 3 ? '/uksee/details/report' : null" [ngClass]="{'action-done':isReportDone.done}">
+              <div class="icon-circle" [ngClass]="{'action-done-bord':isReportDone.done}">
+                <i *ngIf="!(isReportDone.inproccess)"  class="fe fe-more-horizontal" [ngClass]="{'action-done':isReportDone.done}"></i>
+                <i *ngIf="isReportDone.inproccess" class="fe fe-check done-st" [ngClass]="{'action-done':isReportDone.done}"></i>
+              </div>
+              Report 
+            </a>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>
+  <div class="container">
+      <app-progress-bar id="myHeader"></app-progress-bar>
+    <div class="row myContent">
+      <div class="col-12">
+        <router-outlet></router-outlet>
+      </div>
+  </div>
+</div>
